@@ -1,4 +1,4 @@
-﻿namespace Aplication.GetClimaByCity;
+﻿namespace Aplication.UseCases.Clima.GetClimaByCity;
 
 public interface IGetClimaByCityHandler
 {

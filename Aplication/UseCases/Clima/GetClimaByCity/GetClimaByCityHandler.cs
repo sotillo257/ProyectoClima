@@ -1,8 +1,8 @@
 ﻿using Domain.Repository;
 
-namespace Aplication.GetClimaByCity;
+namespace Aplication.UseCases.Clima.GetClimaByCity;
 
-public class GetClimaByCityHandler(IClimaRepository climaRepository) :  IGetClimaByCityHandler
+public class GetClimaByCityHandler(IClimaRepository climaRepository) : IGetClimaByCityHandler
 {
     public async Task<ClimaByCityResource> GetClimaByCity(string ciudad)
     {
