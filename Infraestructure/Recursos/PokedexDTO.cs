@@ -4,148 +4,286 @@ namespace ClassLibrary1.Recursos
 {
     internal class PokedexDTO
     {
+        public class Pokemon
+        {
+            [JsonPropertyName("abilities")]
+            public List<AbilitySlot> Abilities { get; set; } = new();
+
+            [JsonPropertyName("base_experience")]
+            public int BaseExperience { get; set; }
+
+            [JsonPropertyName("cries")]
+            public Cries Cries { get; set; } = new();
+
+            [JsonPropertyName("forms")]
+            public List<NamedApiResource> Forms { get; set; } = new();
+
+            [JsonPropertyName("game_indices")]
+            public List<GameIndex> GameIndices { get; set; } = new();
+
+            [JsonPropertyName("height")]
+            public int Height { get; set; }
+
+            [JsonPropertyName("held_items")]
+            public List<HeldItem> HeldItems { get; set; } = new();
+
+            [JsonPropertyName("id")]
+            public int Id { get; set; }
+
+            [JsonPropertyName("is_default")]
+            public bool IsDefault { get; set; }
+
+            [JsonPropertyName("location_area_encounters")]
+            public string LocationAreaEncounters { get; set; } = string.Empty;
+
+            [JsonPropertyName("moves")]
+            public List<Move> Moves { get; set; } = new();
+
+            [JsonPropertyName("name")]
+            public string Name { get; set; } = string.Empty;
+
+            [JsonPropertyName("order")]
+            public int Order { get; set; }
+
+            [JsonPropertyName("past_abilities")]
+            public List<PastAbility> PastAbilities { get; set; } = new();
+
+            [JsonPropertyName("past_types")]
+            public List<object> PastTypes { get; set; } = new();
+
+            [JsonPropertyName("species")]
+            public NamedApiResource Species { get; set; } = new();
+
+            [JsonPropertyName("sprites")]
+            public Sprites Sprites { get; set; } = new();
+
+            [JsonPropertyName("stats")]
+            public List<Stat> Stats { get; set; } = new();
+
+            [JsonPropertyName("types")]
+            public List<TypeSlot> Types { get; set; } = new();
+
+            [JsonPropertyName("weight")]
+            public int Weight { get; set; }
+        }
+
+        public class AbilitySlot
+        {
             [JsonPropertyName("ability")]
-            public string Ability { get; set; } = string.Empty;
+            public NamedApiResource Ability { get; set; } = new();
 
-            [JsonPropertyName("berry")]
-            public string Berry { get; set; } = string.Empty;
+            [JsonPropertyName("is_hidden")]
+            public bool IsHidden { get; set; }
 
-            [JsonPropertyName("berry-firmness")]
-            public string BerryFirmness { get; set; } = string.Empty;
+            [JsonPropertyName("slot")]
+            public int Slot { get; set; }
+        }
 
-            [JsonPropertyName("berry-flavor")]
-            public string BerryFlavor { get; set; } = string.Empty;
+        public class Cries
+        {
+            [JsonPropertyName("latest")]
+            public string Latest { get; set; } = string.Empty;
 
-            [JsonPropertyName("characteristic")]
-            public string Characteristic { get; set; } = string.Empty;
+            [JsonPropertyName("legacy")]
+            public string Legacy { get; set; } = string.Empty;
+        }
 
-            [JsonPropertyName("contest-effect")]
-            public string ContestEffect { get; set; } = string.Empty;
+        public class GameIndex
+        {
+            [JsonPropertyName("game_index")]
+            public int Game_Index { get; set; }
 
-            [JsonPropertyName("contest-type")]
-            public string ContestType { get; set; } = string.Empty;
+            [JsonPropertyName("version")]
+            public NamedApiResource Version { get; set; } = new();
+        }
 
-            [JsonPropertyName("egg-group")]
-            public string EggGroup { get; set; } = string.Empty;
+        public class HeldItem
+        {
+            [JsonPropertyName("item")]
+            public NamedApiResource Item { get; set; } = new();
 
-            [JsonPropertyName("encounter-condition")]
-            public string EncounterCondition { get; set; } = string.Empty;
+            [JsonPropertyName("version_details")]
+            public List<VersionDetail> VersionDetails { get; set; } = new();
+        }
 
-            [JsonPropertyName("encounter-condition-value")]
-            public string EncounterConditionValue { get; set; } = string.Empty;
+        public class VersionDetail
+        {
+            [JsonPropertyName("rarity")]
+            public int Rarity { get; set; }
 
-            [JsonPropertyName("encounter-method")]
-            public string EncounterMethod { get; set; } = string.Empty;
+            [JsonPropertyName("version")]
+            public NamedApiResource Version { get; set; } = new();
+        }
 
-            [JsonPropertyName("evolution-chain")]
-            public string EvolutionChain { get; set; } = string.Empty;
+        public class Move
+        {
+            [JsonPropertyName("move")]
+            public NamedApiResource MoveInfo { get; set; } = new();
 
-            [JsonPropertyName("evolution-trigger")]
-            public string EvolutionTrigger { get; set; } = string.Empty;
+            [JsonPropertyName("version_group_details")]
+            public List<VersionGroupDetail> VersionGroupDetails { get; set; } = new();
+        }
 
-            [JsonPropertyName("gender")]
-            public string Gender { get; set; } = string.Empty;
+        public class VersionGroupDetail
+        {
+            [JsonPropertyName("level_learned_at")]
+            public int LevelLearnedAt { get; set; }
+
+            [JsonPropertyName("move_learn_method")]
+            public NamedApiResource MoveLearnMethod { get; set; } = new();
+
+            [JsonPropertyName("order")]
+            public object? Order { get; set; }
+
+            [JsonPropertyName("version_group")]
+            public NamedApiResource VersionGroup { get; set; } = new();
+        }
+
+        public class PastAbility
+        {
+            [JsonPropertyName("abilities")]
+            public List<AbilitySlot> Abilities { get; set; } = new();
 
             [JsonPropertyName("generation")]
-            public string Generation { get; set; } = string.Empty;
+            public NamedApiResource Generation { get; set; } = new();
+        }
 
-            [JsonPropertyName("growth-rate")]
-            public string GrowthRate { get; set; } = string.Empty;
+        public class Sprites
+        {
+            [JsonPropertyName("back_default")]
+            public string BackDefault { get; set; } = string.Empty;
 
-            [JsonPropertyName("item")]
-            public string Item { get; set; } = string.Empty;
+            [JsonPropertyName("back_female")]
+            public string BackFemale { get; set; } = string.Empty;
 
-            [JsonPropertyName("item-attribute")]
-            public string ItemAttribute { get; set; } = string.Empty;
+            [JsonPropertyName("back_shiny")]
+            public string BackShiny { get; set; } = string.Empty;
 
-            [JsonPropertyName("item-category")]
-            public string ItemCategory { get; set; } = string.Empty;
+            [JsonPropertyName("back_shiny_female")]
+            public string BackShinyFemale { get; set; } = string.Empty;
 
-            [JsonPropertyName("item-fling-effect")]
-            public string ItemFlingEffect { get; set; } = string.Empty;
+            [JsonPropertyName("front_default")]
+            public string FrontDefault { get; set; } = string.Empty;
 
-            [JsonPropertyName("item-pocket")]
-            public string ItemPocket { get; set; } = string.Empty;
+            [JsonPropertyName("front_female")]
+            public string FrontFemale { get; set; } = string.Empty;
 
-            [JsonPropertyName("language")]
-            public string Language { get; set; } = string.Empty;
+            [JsonPropertyName("front_shiny")]
+            public string FrontShiny { get; set; } = string.Empty;
 
-            [JsonPropertyName("location")]
-            public string Location { get; set; } = string.Empty;
+            [JsonPropertyName("front_shiny_female")]
+            public string FrontShinyFemale { get; set; } = string.Empty;
 
-            [JsonPropertyName("location-area")]
-            public string LocationArea { get; set; } = string.Empty;
+            [JsonPropertyName("other")]
+            public OtherSprites Other { get; set; } = new();
 
-            [JsonPropertyName("machine")]
-            public string Machine { get; set; } = string.Empty;
+            [JsonPropertyName("versions")]
+            public object Versions { get; set; } = new();
+        }
 
-            [JsonPropertyName("move")]
-            public string Move { get; set; } = string.Empty;
+        public class OtherSprites
+        {
+            [JsonPropertyName("dream_world")]
+            public DreamWorld DreamWorld { get; set; } = new();
 
-            [JsonPropertyName("move-ailment")]
-            public string MoveAilment { get; set; } = string.Empty;
+            [JsonPropertyName("home")]
+            public HomeSprites Home { get; set; } = new();
 
-            [JsonPropertyName("move-battle-style")]
-            public string MoveBattleStyle { get; set; } = string.Empty;
+            [JsonPropertyName("official-artwork")]
+            public OfficialArtwork OfficialArtwork { get; set; } = new();
 
-            [JsonPropertyName("move-category")]
-            public string MoveCategory { get; set; } = string.Empty;
+            [JsonPropertyName("showdown")]
+            public ShowdownSprites Showdown { get; set; } = new();
+        }
 
-            [JsonPropertyName("move-damage-class")]
-            public string MoveDamageClass { get; set; } = string.Empty;
+        public class DreamWorld
+        {
+            [JsonPropertyName("front_default")]
+            public string FrontDefault { get; set; } = string.Empty;
 
-            [JsonPropertyName("move-learn-method")]
-            public string MoveLearnMethod { get; set; } = string.Empty;
+            [JsonPropertyName("front_female")]
+            public string FrontFemale { get; set; } = string.Empty;
+        }
 
-            [JsonPropertyName("move-target")]
-            public string MoveTarget { get; set; } = string.Empty;
+        public class HomeSprites
+        {
+            [JsonPropertyName("front_default")]
+            public string FrontDefault { get; set; } = string.Empty;
 
-            [JsonPropertyName("nature")]
-            public string Nature { get; set; } = string.Empty;
+            [JsonPropertyName("front_female")]
+            public string FrontFemale { get; set; } = string.Empty;
 
-            [JsonPropertyName("pal-park-area")]
-            public string PalParkArea { get; set; } = string.Empty;
+            [JsonPropertyName("front_shiny")]
+            public string FrontShiny { get; set; } = string.Empty;
 
-            [JsonPropertyName("pokeathlon-stat")]
-            public string PokeathlonStat { get; set; } = string.Empty;
+            [JsonPropertyName("front_shiny_female")]
+            public string FrontShinyFemale { get; set; } = string.Empty;
+        }
 
-            [JsonPropertyName("pokedex")]
-            public string Pokedex { get; set; } = string.Empty;
+        public class OfficialArtwork
+        {
+            [JsonPropertyName("front_default")]
+            public string FrontDefault { get; set; } = string.Empty;
 
-            [JsonPropertyName("pokemon")]
-            public string Pokemon { get; set; } = string.Empty;
+            [JsonPropertyName("front_shiny")]
+            public string FrontShiny { get; set; } = string.Empty;
+        }
 
-        [JsonPropertyName("pokemon-color")]
-            public string PokemonColor { get; set; } = string.Empty;
+        public class ShowdownSprites
+        {
+            [JsonPropertyName("back_default")]
+            public string BackDefault { get; set; } = string.Empty;
 
-            [JsonPropertyName("pokemon-form")]
-            public string PokemonForm { get; set; } = string.Empty;
+            [JsonPropertyName("back_female")]
+            public string BackFemale { get; set; } = string.Empty;
 
-            [JsonPropertyName("pokemon-habitat")]
-            public string PokemonHabitat { get; set; } = string.Empty;
+            [JsonPropertyName("back_shiny")]
+            public string BackShiny { get; set; } = string.Empty;
 
-            [JsonPropertyName("pokemon-shape")]
-            public string PokemonShape { get; set; } = string.Empty;
+            [JsonPropertyName("back_shiny_female")]
+            public string BackShinyFemale { get; set; } = string.Empty;
 
-            [JsonPropertyName("pokemon-species")]
-            public string PokemonSpecies { get; set; } = string.Empty;
+            [JsonPropertyName("front_default")]
+            public string FrontDefault { get; set; } = string.Empty;
 
-            [JsonPropertyName("region")]
-            public string Region { get; set; } = string.Empty;
+            [JsonPropertyName("front_female")]
+            public string FrontFemale { get; set; } = string.Empty;
+
+            [JsonPropertyName("front_shiny")]
+            public string FrontShiny { get; set; } = string.Empty;
+
+            [JsonPropertyName("front_shiny_female")]
+            public string FrontShinyFemale { get; set; } = string.Empty;
+        }
+
+        public class Stat
+        {
+            [JsonPropertyName("base_stat")]
+            public int BaseStat { get; set; }
+
+            [JsonPropertyName("effort")]
+            public int Effort { get; set; }
 
             [JsonPropertyName("stat")]
-            public string Stat { get; set; } = string.Empty;
+            public NamedApiResource StatInfo { get; set; } = new();
+        }
 
-            [JsonPropertyName("super-contest-effect")]
-            public string SuperContestEffect { get; set; } = string.Empty;
+        public class TypeSlot
+        {
+            [JsonPropertyName("slot")]
+            public int Slot { get; set; }
 
-        [JsonPropertyName("type")]
-        public string Type { get; set; } = string.Empty;
+            [JsonPropertyName("type")]
+            public NamedApiResource Type { get; set; } = new();
+        }
 
-        [JsonPropertyName("version")]
-            public string Version { get; set; } = string.Empty;
+        public class NamedApiResource
+        {
+            [JsonPropertyName("name")]
+            public string Name { get; set; } = string.Empty;
 
-            [JsonPropertyName("version-group")]
-            public string VersionGroup { get; set; } = string.Empty;
+            [JsonPropertyName("url")]
+            public string Url { get; set; } = string.Empty;
         }
     }
+}

@@ -19,8 +19,12 @@ namespace ClassLibrary1.Repository;
                 var body = await res.Content.ReadAsStringAsync();
                 throw new HttpRequestException($"GET failed {(int)res.StatusCode} {res.ReasonPhrase}. Body: {body}");
             }
-            var pokedexResponse = await res.Content.ReadFromJsonAsync<PokedexDTO>();
+            var pokedexResponse = await res.Content.ReadFromJsonAsync<PokedexDTO.Pokemon>();
 
-            return Pokedex.Create(pokemon, pokedexResponse.Pokemon);
+            // Extraer el tipo y el orden del Pokémon
+            var type = pokedexResponse.Types?.FirstOrDefault()?.Type?.Name ?? string.Empty;
+            var id = pokedexResponse.Id;
+
+            return Pokedex.Create(pokemon, type, id);
         }
     }
