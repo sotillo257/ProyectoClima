@@ -1,23 +1,21 @@
 ﻿namespace Domain.Entity;
 
-public class Clima
+public class Pokedex
 {
     public string Pokemon { get; private set; }
-    public int Id { get; private set; }
-    
+    public string Type { get; private set; } = string.Empty;
 
-    public Pokedex(string pokemon, int id)
+
+    public Pokedex(string pokemon, string type)
     {
-        ArgumentException.ThrowIfNullOrEmpty(ciudad, nameof(pokemon));
-        
+        ArgumentException.ThrowIfNullOrEmpty(pokemon, nameof(pokemon));
+
         Pokemon = pokemon;
-        Id = id;
+        Type = type;
     }
 
-    public static Pokedex Create(string pokemon, int id, string type)
+    public static Pokedex Create(string pokemon, string type)
     {
-        return new (pokemon, id, type);
+        return new(pokemon, type);
     }
-    
-
 }

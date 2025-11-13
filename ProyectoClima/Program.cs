@@ -1,4 +1,5 @@
-using Aplication.GetClimaByCity;
+using Aplication.UseCases.Pokedex.GetPokemonByNameOrId;
+using Aplication.UseCases.Clima.GetClimaByCity;
 using ClassLibrary1.Repository;
 using Domain.Repository;
 
@@ -17,6 +18,15 @@ builder.Services.AddHttpClient<ClimaRepository>(c =>
     c.BaseAddress = new Uri("https://api.openweathermap.org/");
     c.DefaultRequestHeaders.UserAgent.ParseAdd("MyApp/1.0");
 });
+
+builder.Services.AddScoped<IPokedexRepository, PokedexRepository>();
+builder.Services.AddScoped<IGetPokemonByNameHandler, GetPokemonByNameHandler>();
+builder.Services.AddHttpClient<PokedexRepository>(c =>
+{
+    c.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
+    c.DefaultRequestHeaders.UserAgent.ParseAdd("MyApp/1.0");
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

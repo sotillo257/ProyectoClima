@@ -2,7 +2,7 @@
 
 namespace Domain.Repository;
 
-public interface IClimaRepository
+public interface IPokedexRepository
 {
-    Task<Clima> GetClimaByCity(string ciudad);
+    Task<Pokedex> GetPokemonByNameOrId(string pokemon);
 }

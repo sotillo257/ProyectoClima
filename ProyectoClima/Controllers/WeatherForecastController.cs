@@ -1,4 +1,4 @@
-using Aplication.GetClimaByCity;
+using Aplication.UseCases.Clima.GetClimaByCity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProyectoClima.Controllers;
