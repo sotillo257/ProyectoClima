@@ -26,9 +26,10 @@ namespace ClassLibrary1.Repository;
             throw new Exception("Failed to deserialize Pokemon data");
         }
 
+        var species= pokedexResponse.Species;
         var type = pokedexResponse.Types;
         var id = pokedexResponse.Id;
 
-        return Pokedex.Create(pokemon, type, id);
+        return Pokedex.Create(pokemon, species, type, id);
         }
     }
