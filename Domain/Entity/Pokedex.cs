@@ -3,11 +3,11 @@
 public class Pokedex
 {
     public string Pokemon { get; private set; }
-    public string Type { get; private set; } = string.Empty;
+    public object Type { get; private set; } 
     public int Id { get; private set; }
 
 
-    public Pokedex(string pokemon, string type, int id)
+    public Pokedex(string pokemon, object type, int id)
     {
         ArgumentException.ThrowIfNullOrEmpty(pokemon, nameof(pokemon));
 
@@ -16,7 +16,7 @@ public class Pokedex
         Id = id;
     }
 
-    public static Pokedex Create(string pokemon, string type, int id)
+    public static Pokedex Create(string pokemon, object type, int id)
     {
         return new(pokemon, type, id);
     }

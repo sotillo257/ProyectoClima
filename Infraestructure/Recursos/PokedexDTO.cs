@@ -28,7 +28,7 @@ namespace ClassLibrary1.Recursos
             public List<HeldItem> HeldItems { get; set; } = new();
 
             [JsonPropertyName("id")]
-            public int Id { get; set; }
+            public int Id { get; set; } 
 
             [JsonPropertyName("is_default")]
             public bool IsDefault { get; set; }
