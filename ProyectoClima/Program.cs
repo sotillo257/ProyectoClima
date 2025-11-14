@@ -1,3 +1,5 @@
+using Aplication.UseCases.Pokedex.GetPokemonByNameOrId;
+using Aplication.UseCases.Clima.GetClimaByCity;
 using Aplication.UseCases.Clima.GetClimaByCity;
 using ClassLibrary1.Configuration;
 using ClassLibrary1.Repository;
@@ -27,6 +29,15 @@ builder.Services.AddHttpClient<ClimaRepository>(c =>
 // Configure Problem Details for error handling
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ProyectoClima.Middleware.GlobalExceptionHandler>();
+
+
+builder.Services.AddScoped<IPokedexRepository, PokedexRepository>();
+builder.Services.AddScoped<IGetPokemonByNameHandler, GetPokemonByNameHandler>();
+builder.Services.AddHttpClient<PokedexRepository>(c =>
+{
+    c.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
+    c.DefaultRequestHeaders.UserAgent.ParseAdd("MyApp/1.0");
+});
 
 var app = builder.Build();
 

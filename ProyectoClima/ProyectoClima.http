@@ -1,6 +1,6 @@
-@ProyectoClima_HostAddress = http://localhost:5229
+@ProyectoPokedex_HostAddress = http://localhost:7160
 
-GET {{ProyectoClima_HostAddress}}/weatherforecast/
+GET {{ProyectoPokedex_HostAddress}}/pokemon/
 Accept: application/json
 
 ###
