@@ -22,7 +22,7 @@ namespace ClassLibrary1.Recursos
         public Species species { get; set; }
         public Sprites sprites { get; set; }
         public List<Stat> stats { get; set; }
-        public List<Type2> types { get; set; }
+        public List<Type> types { get; set; }
         public int weight { get; set; }
     }
     
@@ -351,7 +351,7 @@ namespace ClassLibrary1.Recursos
     public class Type
     {
         public int slot { get; set; }
-        public Type type { get; set; }
+        public Type2 type { get; set; }
     }
 
     public class Type2

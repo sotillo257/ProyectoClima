@@ -27,7 +27,7 @@ namespace ClassLibrary1.Repository;
         }
 
         var species= pokedexResponse.species.name;
-        var type = pokedexResponse.types.FirstOrDefault().name;
+        var type = pokedexResponse.types.FirstOrDefault().type.name;
         var id = pokedexResponse.id;
 
         return Pokedex.Create(pokemon, species, type, id);
