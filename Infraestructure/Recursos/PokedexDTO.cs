@@ -2,288 +2,415 @@
 
 namespace ClassLibrary1.Recursos
 {
-    internal class PokedexDTO
+    public class PokedexDTO
     {
-        public class Pokemon
-        {
-            [JsonPropertyName("abilities")]
-            public List<AbilitySlot> Abilities { get; set; } = new();
-
-            [JsonPropertyName("base_experience")]
-            public int BaseExperience { get; set; }
-
-            [JsonPropertyName("cries")]
-            public Cries Cries { get; set; } = new();
-
-            [JsonPropertyName("forms")]
-            public List<NamedApiResource> Forms { get; set; } = new();
-
-            [JsonPropertyName("game_indices")]
-            public List<GameIndex> GameIndices { get; set; } = new();
-
-            [JsonPropertyName("height")]
-            public int Height { get; set; }
-
-            [JsonPropertyName("held_items")]
-            public List<HeldItem> HeldItems { get; set; } = new();
-
-            [JsonPropertyName("id")]
-            public int Id { get; set; } 
-
-            [JsonPropertyName("is_default")]
-            public bool IsDefault { get; set; }
-
-            [JsonPropertyName("location_area_encounters")]
-            public string LocationAreaEncounters { get; set; } = string.Empty;
-
-            [JsonPropertyName("moves")]
-            public List<Move> Moves { get; set; } = new();
-
-            [JsonPropertyName("name")]
-            public string Name { get; set; } = string.Empty;
-
-            [JsonPropertyName("order")]
-            public int Order { get; set; }
-
-            [JsonPropertyName("past_abilities")]
-            public List<PastAbility> PastAbilities { get; set; } = new();
-
-            [JsonPropertyName("past_types")]
-            public List<object> PastTypes { get; set; } = new();
-
-            [JsonPropertyName("species")]
-            public NamedApiResource Species { get; set; } = new();
-
-            [JsonPropertyName("sprites")]
-            public Sprites Sprites { get; set; } = new();
-
-            [JsonPropertyName("stats")]
-            public List<Stat> Stats { get; set; } = new();
-
-            [JsonPropertyName("types")]
-            public List<TypeSlot> Types { get; set; } = new();
-
-            [JsonPropertyName("weight")]
-            public int Weight { get; set; }
-        }
-
-        public class AbilitySlot
-        {
-            [JsonPropertyName("ability")]
-            public NamedApiResource Ability { get; set; } = new();
-
-            [JsonPropertyName("is_hidden")]
-            public bool IsHidden { get; set; }
-
-            [JsonPropertyName("slot")]
-            public int Slot { get; set; }
-        }
-
-        public class Cries
-        {
-            [JsonPropertyName("latest")]
-            public string Latest { get; set; } = string.Empty;
-
-            [JsonPropertyName("legacy")]
-            public string Legacy { get; set; } = string.Empty;
-        }
-
-        public class GameIndex
-        {
-            [JsonPropertyName("game_index")]
-            public int Game_Index { get; set; }
-
-            [JsonPropertyName("version")]
-            public NamedApiResource Version { get; set; } = new();
-        }
-
-        public class HeldItem
-        {
-            [JsonPropertyName("item")]
-            public NamedApiResource Item { get; set; } = new();
-
-            [JsonPropertyName("version_details")]
-            public List<VersionDetail> VersionDetails { get; set; } = new();
-        }
-
-        public class VersionDetail
-        {
-            [JsonPropertyName("rarity")]
-            public int Rarity { get; set; }
-
-            [JsonPropertyName("version")]
-            public NamedApiResource Version { get; set; } = new();
-        }
-
-        public class Move
-        {
-            [JsonPropertyName("move")]
-            public NamedApiResource MoveInfo { get; set; } = new();
-
-            [JsonPropertyName("version_group_details")]
-            public List<VersionGroupDetail> VersionGroupDetails { get; set; } = new();
-        }
-
-        public class VersionGroupDetail
-        {
-            [JsonPropertyName("level_learned_at")]
-            public int LevelLearnedAt { get; set; }
-
-            [JsonPropertyName("move_learn_method")]
-            public NamedApiResource MoveLearnMethod { get; set; } = new();
-
-            [JsonPropertyName("order")]
-            public object? Order { get; set; }
-
-            [JsonPropertyName("version_group")]
-            public NamedApiResource VersionGroup { get; set; } = new();
-        }
-
-        public class PastAbility
-        {
-            [JsonPropertyName("abilities")]
-            public List<AbilitySlot> Abilities { get; set; } = new();
-
-            [JsonPropertyName("generation")]
-            public NamedApiResource Generation { get; set; } = new();
-        }
-
-        public class Sprites
-        {
-            [JsonPropertyName("back_default")]
-            public string BackDefault { get; set; } = string.Empty;
-
-            [JsonPropertyName("back_female")]
-            public string BackFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("back_shiny")]
-            public string BackShiny { get; set; } = string.Empty;
-
-            [JsonPropertyName("back_shiny_female")]
-            public string BackShinyFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_default")]
-            public string FrontDefault { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_female")]
-            public string FrontFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_shiny")]
-            public string FrontShiny { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_shiny_female")]
-            public string FrontShinyFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("other")]
-            public OtherSprites Other { get; set; } = new();
-
-            [JsonPropertyName("versions")]
-            public object Versions { get; set; } = new();
-        }
-
-        public class OtherSprites
-        {
-            [JsonPropertyName("dream_world")]
-            public DreamWorld DreamWorld { get; set; } = new();
-
-            [JsonPropertyName("home")]
-            public HomeSprites Home { get; set; } = new();
-
-            [JsonPropertyName("official-artwork")]
-            public OfficialArtwork OfficialArtwork { get; set; } = new();
-
-            [JsonPropertyName("showdown")]
-            public ShowdownSprites Showdown { get; set; } = new();
-        }
-
-        public class DreamWorld
-        {
-            [JsonPropertyName("front_default")]
-            public string FrontDefault { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_female")]
-            public string FrontFemale { get; set; } = string.Empty;
-        }
-
-        public class HomeSprites
-        {
-            [JsonPropertyName("front_default")]
-            public string FrontDefault { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_female")]
-            public string FrontFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_shiny")]
-            public string FrontShiny { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_shiny_female")]
-            public string FrontShinyFemale { get; set; } = string.Empty;
-        }
-
-        public class OfficialArtwork
-        {
-            [JsonPropertyName("front_default")]
-            public string FrontDefault { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_shiny")]
-            public string FrontShiny { get; set; } = string.Empty;
-        }
-
-        public class ShowdownSprites
-        {
-            [JsonPropertyName("back_default")]
-            public string BackDefault { get; set; } = string.Empty;
-
-            [JsonPropertyName("back_female")]
-            public string BackFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("back_shiny")]
-            public string BackShiny { get; set; } = string.Empty;
-
-            [JsonPropertyName("back_shiny_female")]
-            public string BackShinyFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_default")]
-            public string FrontDefault { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_female")]
-            public string FrontFemale { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_shiny")]
-            public string FrontShiny { get; set; } = string.Empty;
-
-            [JsonPropertyName("front_shiny_female")]
-            public string FrontShinyFemale { get; set; } = string.Empty;
-        }
-
-        public class Stat
-        {
-            [JsonPropertyName("base_stat")]
-            public int BaseStat { get; set; }
-
-            [JsonPropertyName("effort")]
-            public int Effort { get; set; }
-
-            [JsonPropertyName("stat")]
-            public NamedApiResource StatInfo { get; set; } = new();
-        }
-
-        public class TypeSlot
-        {
-            [JsonPropertyName("slot")]
-            public int Slot { get; set; }
-
-            [JsonPropertyName("type")]
-            public NamedApiResource Type { get; set; } = new();
-        }
-
-        public class NamedApiResource
-        {
-            [JsonPropertyName("name")]
-            public string Name { get; set; } = string.Empty;
-
-            [JsonPropertyName("url")]
-            public string Url { get; set; } = string.Empty;
-        }
+        public List<Ability> abilities { get; set; }
+        public int base_experience { get; set; }
+        public Cries cries { get; set; }
+        public List<Form> forms { get; set; }
+        public List<GameIndex> game_indices { get; set; }
+        public int height { get; set; }
+        public List<HeldItem> held_items { get; set; }
+        public int id { get; set; }
+        public bool is_default { get; set; }
+        public string location_area_encounters { get; set; }
+        public List<Move> moves { get; set; }
+        public string name { get; set; }
+        public int order { get; set; }
+        public List<PastAbility> past_abilities { get; set; }
+        public List<object> past_types { get; set; }
+        public Species species { get; set; }
+        public Sprites sprites { get; set; }
+        public List<Stat> stats { get; set; }
+        public List<Type2> types { get; set; }
+        public int weight { get; set; }
     }
+    
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    public class Ability
+    {
+        public Ability ability { get; set; }
+        public bool is_hidden { get; set; }
+        public int slot { get; set; }
+    }
+
+    public class Ability2
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class Animated
+    {
+        public string back_default { get; set; }
+        public string back_female { get; set; }
+        public string back_shiny { get; set; }
+        public string back_shiny_female { get; set; }
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class BlackWhite
+    {
+        public Animated animated { get; set; }
+        public string back_default { get; set; }
+        public string back_female { get; set; }
+        public string back_shiny { get; set; }
+        public string back_shiny_female { get; set; }
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class Cries
+    {
+        public string latest { get; set; }
+        public string legacy { get; set; }
+    }
+
+    public class Crystal
+    {
+        public string back_default { get; set; }
+        public string back_shiny { get; set; }
+        public string back_shiny_transparent { get; set; }
+        public string back_transparent { get; set; }
+        public string front_default { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_transparent { get; set; }
+        public string front_transparent { get; set; }
+    }
+
+    public class DiamondPearl
+    {
+        public string back_default { get; set; }
+        public string back_female { get; set; }
+        public string back_shiny { get; set; }
+        public string back_shiny_female { get; set; }
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class DreamWorld
+    {
+        public string front_default { get; set; }
+        public object front_female { get; set; }
+    }
+
+    public class Emerald
+    {
+        public string front_default { get; set; }
+        public string front_shiny { get; set; }
+    }
+
+    public class FireredLeafgreen
+    {
+        public string back_default { get; set; }
+        public string back_shiny { get; set; }
+        public string front_default { get; set; }
+        public string front_shiny { get; set; }
+    }
+
+    public class Form
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class GameIndex
+    {
+        public int game_index { get; set; }
+        public Version version { get; set; }
+    }
+
+    public class Generation
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class GenerationI
+    {
+        public Yellow yellow { get; set; }
+    }
+
+    public class GenerationIi
+    {
+        public Crystal crystal { get; set; }
+        public Gold gold { get; set; }
+        public Silver silver { get; set; }
+    }
+
+    public class GenerationIii
+    {
+        public Emerald emerald { get; set; }
+    }
+
+    public class GenerationIv
+    {
+        public Platinum platinum { get; set; }
+    }
+
+    public class GenerationV
+    {
+    }
+
+    public class GenerationVi
+    {
+    }
+
+    public class GenerationVii
+    {
+    }
+
+    public class GenerationViii
+    {
+        public Icons icons { get; set; }
+    }
+
+    public class Gold
+    {
+        public string back_default { get; set; }
+        public string back_shiny { get; set; }
+        public string front_default { get; set; }
+        public string front_shiny { get; set; }
+        public string front_transparent { get; set; }
+    }
+
+    public class HeartgoldSoulsilver
+    {
+        public string back_default { get; set; }
+        public string back_female { get; set; }
+        public string back_shiny { get; set; }
+        public string back_shiny_female { get; set; }
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class HeldItem
+    {
+        public Item item { get; set; }
+        public List<VersionDetail> version_details { get; set; }
+    }
+
+    public class Home
+    {
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class Icons
+    {
+        public string front_default { get; set; }
+        public object front_female { get; set; }
+    }
+
+    public class Item
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class Move
+    {
+        public Move move { get; set; }
+        public List<VersionGroupDetail> version_group_details { get; set; }
+    }
+
+    public class Move2
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class MoveLearnMethod
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class OfficialArtwork
+    {
+        public string front_default { get; set; }
+        public string front_shiny { get; set; }
+    }
+
+    public class OmegarubyAlphasapphire
+    {
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class Other
+    {
+        public DreamWorld dream_world { get; set; }
+        public Home home { get; set; }
+
+        public Showdown showdown { get; set; }
+    }
+
+    public class PastAbility
+    {
+        public List<Ability> abilities { get; set; }
+        public Generation generation { get; set; }
+    }
+
+    public class Platinum
+    {
+        public string back_default { get; set; }
+        public string back_female { get; set; }
+        public string back_shiny { get; set; }
+        public string back_shiny_female { get; set; }
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class RedBlue
+    {
+        public string back_default { get; set; }
+        public string back_gray { get; set; }
+        public string back_transparent { get; set; }
+        public string front_default { get; set; }
+        public string front_gray { get; set; }
+        public string front_transparent { get; set; }
+    }
+
+    public class RubySapphire
+    {
+        public string back_default { get; set; }
+        public string back_shiny { get; set; }
+        public string front_default { get; set; }
+        public string front_shiny { get; set; }
+    }
+
+    public class Showdown
+    {
+        public string back_default { get; set; }
+        public string back_female { get; set; }
+        public string back_shiny { get; set; }
+        public object back_shiny_female { get; set; }
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class Silver
+    {
+        public string back_default { get; set; }
+        public string back_shiny { get; set; }
+        public string front_default { get; set; }
+        public string front_shiny { get; set; }
+        public string front_transparent { get; set; }
+    }
+
+    public class Species
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class Sprites
+    {
+        public string back_default { get; set; }
+        public string back_female { get; set; }
+        public string back_shiny { get; set; }
+        public string back_shiny_female { get; set; }
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+        public Other other { get; set; }
+    }
+
+    public class Stat
+    {
+        public int base_stat { get; set; }
+        public int effort { get; set; }
+        public Stat stat { get; set; }
+    }
+
+    public class Stat2
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class Type
+    {
+        public int slot { get; set; }
+        public Type type { get; set; }
+    }
+
+    public class Type2
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class UltraSunUltraMoon
+    {
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class Version
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class VersionDetail
+    {
+        public int rarity { get; set; }
+        public Version version { get; set; }
+    }
+
+    public class VersionGroup
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class VersionGroupDetail
+    {
+        public int level_learned_at { get; set; }
+        public MoveLearnMethod move_learn_method { get; set; }
+        public int? order { get; set; }
+        public VersionGroup version_group { get; set; }
+    }
+
+    public class XY
+    {
+        public string front_default { get; set; }
+        public string front_female { get; set; }
+        public string front_shiny { get; set; }
+        public string front_shiny_female { get; set; }
+    }
+
+    public class Yellow
+    {
+        public string back_default { get; set; }
+        public string back_gray { get; set; }
+        public string back_transparent { get; set; }
+        public string front_default { get; set; }
+        public string front_gray { get; set; }
+        public string front_transparent { get; set; }
+    }
+
+
 }
