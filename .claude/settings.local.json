@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build:*)",
+      "Bash(dotnet run:*)",
+      "Bash(timeout:*)",
+      "Bash(dotnet restore:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
