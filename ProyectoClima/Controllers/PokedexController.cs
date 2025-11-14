@@ -6,7 +6,7 @@ namespace ProyectoClima.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class PokedexController : Controller
+    public class PokedexController : ControllerBase
     {
         private readonly IGetPokemonByNameHandler _getPokemonByNameHandler;
         private readonly ILogger<PokedexController> _logger;
@@ -17,8 +17,7 @@ namespace ProyectoClima.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetPokemon")]
-        [Route("GetPokemon/{pokemon}")]
+        [HttpGet("{pokemon}")]
         public async Task<PokemonByNameResource> Get(string pokemon)
         {
             return await _getPokemonByNameHandler.GetPokemonByNameOrId(pokemon);

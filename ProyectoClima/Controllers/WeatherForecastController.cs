@@ -26,8 +26,7 @@ public class WeatherForecastController : ControllerBase
     /// <response code="404">Si no se encuentra la ciudad</response>
     /// <response code="500">Si ocurre un error interno del servidor</response>
     /// <response code="503">Si el servicio externo de clima no está disponible</response>
-    [HttpGet(Name = "GetWeatherForecast")]
-    [Route("GetWeatherForecast/{city}")]
+    [HttpGet("{city}")]
     [ProducesResponseType(typeof(ClimaByCityResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
