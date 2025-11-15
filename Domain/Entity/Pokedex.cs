@@ -8,7 +8,7 @@ public class Pokedex
     public int Id { get; private set; }
 
 
-    public Pokedex(string pokemon, string species, string type, int id)
+    private Pokedex(string pokemon, string species, string type, int id)
     {
         ArgumentException.ThrowIfNullOrEmpty(pokemon, nameof(pokemon));
 

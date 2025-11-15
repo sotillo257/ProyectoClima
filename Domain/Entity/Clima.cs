@@ -6,7 +6,7 @@ public class Clima
     public double Celsius { get; private set; }
 
 
-    public Clima(string ciudad, double celsius)
+    private Clima(string ciudad, double celsius)
     {
         ArgumentException.ThrowIfNullOrEmpty(ciudad, nameof(ciudad));
 
