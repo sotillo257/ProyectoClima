@@ -45,7 +45,7 @@ jobs:
           echo "semver=$(echo ${{ steps.gitversion.outputs.GitVersion_SemVer }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
           echo "full_semver=$(echo ${{ steps.gitversion.outputs.GitVersion_FullSemVer }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
           echo "major_minor_patch=$(echo ${{ steps.gitversion.outputs.GitVersion_MajorMinorPatch }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
-          echo "merge=$(echo ${{ (startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/release')) && github.event_name == 'pull_request' && github.event.action == 'closed' }})" >> $GITHUB_OUTPUT
+          echo "merge=${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && (github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'release') }}" >> $GITHUB_OUTPUT
 
       - name: Create and push tag
         if: ${{ steps.variables.outputs.merge == 'true' }}
@@ -96,7 +96,7 @@ jobs:
         id: docker_tags
         run: |
 
-          IMAGE=${{ env.REGISTRY }}/${{ github.actor }}/proyectoClima/api
+          IMAGE=${{ env.REGISTRY }}/${{ github.repository_owner }}/proyectoclima/api
           TAGS="$IMAGE:${{ env.SEMVER }}"
 
           if [[ "${{ env.MERGE }}" == "true" ]]; then
