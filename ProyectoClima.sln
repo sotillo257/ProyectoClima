@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{55BA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{0B653E4E-CEAF-40E7-AC19-9E00488ECCA5}"
 	ProjectSection(SolutionItems) = preProject
-		pr-ci.yml = pr-ci.yml
+		.github\workflows\pr-ci.yml = .github\workflows\pr-ci.yml
 	EndProjectSection
 EndProject
 Global
