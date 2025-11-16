@@ -23,17 +23,18 @@ namespace ClassLibrary1.Repository;
                 var body = await res.Content.ReadAsStringAsync();
                 throw new HttpRequestException($"GET failed {(int)res.StatusCode} {res.ReasonPhrase}. Body: {body}");
             }
-        var pokedexResponse = await res.Content.ReadFromJsonAsync<PokedexDTO>();
-        if (pokedexResponse is null)
-        {
-            // Handle null response appropriately
-            throw new Exception("Failed to deserialize Pokemon data");
-        }
 
-        var species= pokedexResponse.species.name;
-        var type = pokedexResponse.types.FirstOrDefault().type.name;
-        var id = pokedexResponse.id;
+            var pokedexResponse = await res.Content.ReadFromJsonAsync<PokedexDTO>();
+            if (pokedexResponse is null)
+            {
+                // Handle null response appropriately
+                throw new Exception("Failed to deserialize Pokemon data");
+            }
 
-        return Pokedex.Create(pokedexResponse.name, species, type, id);
+            var species= pokedexResponse.species.name;
+            var type = pokedexResponse.types.FirstOrDefault().type.name;
+            var id = pokedexResponse.id;
+
+            return Pokedex.Create(pokedexResponse.name, species, type, id);
         }
     }
