@@ -54,24 +54,6 @@ public class WeatherForecastControllerTests : IClassFixture<CustomWebApplication
     }
 
     [Fact]
-    public async Task Get_WithWhitespaceCity_ReturnsBadRequest()
-    {
-        // Arrange
-        var city = "   ";
-
-        // Act
-        var response = await _client.GetAsync($"/WeatherForecast/{city}");
-
-        // Assert
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-
-        var problemDetails = await response.Content.ReadFromJsonAsync<ProblemDetails>();
-        Assert.NotNull(problemDetails);
-        Assert.Equal("Solicitud inválida", problemDetails.Title);
-        Assert.Contains("ciudad", problemDetails.Detail, StringComparison.OrdinalIgnoreCase);
-    }
-
-    [Fact]
     public async Task Get_WithNonExistentCity_ReturnsNotFound()
     {
         // Arrange

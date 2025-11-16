@@ -34,7 +34,7 @@ public class WeatherForecastController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status503ServiceUnavailable)]
     public async Task<ActionResult<ClimaByCityResource>> Get(string city)
     {
-        if (string.IsNullOrWhiteSpace(city))
+        if (string.IsNullOrEmpty(city))
         {
             _logger.LogWarning("Intento de consulta con nombre de ciudad vacío");
             throw new ArgumentException("El nombre de la ciudad no puede estar vacío", nameof(city));

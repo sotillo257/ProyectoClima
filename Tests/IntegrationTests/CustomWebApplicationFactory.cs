@@ -38,28 +38,28 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public void SetupMockClimaRepository(string city, Clima climaResponse)
     {
         MockClimaRepository
-            .Setup(repo => repo.GetClimaByCityAsync(city))
+            .Setup(repo => repo.GetClimaByCity(city))
             .ReturnsAsync(climaResponse);
     }
 
     public void SetupMockPokedexRepository(string pokemon, Pokedex pokemonResponse)
     {
         MockPokedexRepository
-            .Setup(repo => repo.GetPokemonByNameOrIdAsync(pokemon))
+            .Setup(repo => repo.GetPokemonByNameOrId(pokemon))
             .ReturnsAsync(pokemonResponse);
     }
 
     public void SetupMockClimaRepositoryException(string city, Exception exception)
     {
         MockClimaRepository
-            .Setup(repo => repo.GetClimaByCityAsync(city))
+            .Setup(repo => repo.GetClimaByCity(city))
             .ThrowsAsync(exception);
     }
 
     public void SetupMockPokedexRepositoryException(string pokemon, Exception exception)
     {
         MockPokedexRepository
-            .Setup(repo => repo.GetPokemonByNameOrIdAsync(pokemon))
+            .Setup(repo => repo.GetPokemonByNameOrId(pokemon))
             .ThrowsAsync(exception);
     }
 }

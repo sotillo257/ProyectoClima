@@ -8,6 +8,6 @@ public class GetPokemonByNameHandler(IPokedexRepository pokedexRepository) : IGe
     {
         var pokedex = await pokedexRepository.GetPokemonByNameOrId(pokemon);
 
-        return new PokemonByNameResource(pokemon, pokedex.Species, pokedex.Type, pokedex.Id);
+        return new PokemonByNameResource(pokedex.Pokemon, pokedex.Species, pokedex.Type, pokedex.Id);
     }
 }

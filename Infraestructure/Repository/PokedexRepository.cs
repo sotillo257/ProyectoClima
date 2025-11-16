@@ -30,6 +30,6 @@ namespace ClassLibrary1.Repository;
         var type = pokedexResponse.types.FirstOrDefault().type.name;
         var id = pokedexResponse.id;
 
-        return Pokedex.Create(pokemon, species, type, id);
+        return Pokedex.Create(pokedexResponse.name, species, type, id);
         }
     }
