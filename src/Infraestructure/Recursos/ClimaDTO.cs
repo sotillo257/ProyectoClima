@@ -11,7 +11,6 @@ public class ClimaDTO
     [JsonPropertyName("weather")]
     public List<WeatherItem> Weather { get; init; } = new();
 
-    // "base" es palabra clave; se mapea con atributo
     [JsonPropertyName("base")]
     public string Base { get; init; } = string.Empty;
 
