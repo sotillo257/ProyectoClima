@@ -33,6 +33,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\pr-ci.yml = .github\workflows\pr-ci.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".helm", ".helm", "{271073AB-542A-4BEA-A287-4E0B426EE46E}"
+	ProjectSection(SolutionItems) = preProject
+		.helm\proyectoclima\.helmignore = .helm\proyectoclima\.helmignore
+		.helm\proyectoclima\Chart.yaml = .helm\proyectoclima\Chart.yaml
+		.helm\proyectoclima\values.yaml = .helm\proyectoclima\values.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{BC6312B0-ADF3-4B93-A210-C08987D49862}"
+	ProjectSection(SolutionItems) = preProject
+		.helm\proyectoclima\templates\deployment.yaml = .helm\proyectoclima\templates\deployment.yaml
+		.helm\proyectoclima\templates\hpa.yaml = .helm\proyectoclima\templates\hpa.yaml
+		.helm\proyectoclima\templates\ingress.yaml = .helm\proyectoclima\templates\ingress.yaml
+		.helm\proyectoclima\templates\NOTES.txt = .helm\proyectoclima\templates\NOTES.txt
+		.helm\proyectoclima\templates\service.yaml = .helm\proyectoclima\templates\service.yaml
+		.helm\proyectoclima\templates\serviceaccount.yaml = .helm\proyectoclima\templates\serviceaccount.yaml
+		.helm\proyectoclima\templates\_helpers.tpl = .helm\proyectoclima\templates\_helpers.tpl
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +98,7 @@ Global
 		{EDBD099D-29F4-AA35-673A-5F69A5187346} = {099BAC10-8E33-4ADF-A886-8B39BE11A300}
 		{79304FCB-ADA2-6CBD-2FC6-20606CCAAC35} = {099BAC10-8E33-4ADF-A886-8B39BE11A300}
 		{0B653E4E-CEAF-40E7-AC19-9E00488ECCA5} = {55BA6803-5654-48A9-A4A3-1E5668EE5B9B}
+		{BC6312B0-ADF3-4B93-A210-C08987D49862} = {271073AB-542A-4BEA-A287-4E0B426EE46E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00A0E1E7-7040-44E0-A64D-9FC2DD8CE4AE}
