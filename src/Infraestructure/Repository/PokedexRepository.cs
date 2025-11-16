@@ -15,6 +15,7 @@ namespace ClassLibrary1.Repository;
         {
             var client = clientFactory.CreateClient();
             client.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
+
             using var req = new HttpRequestMessage(HttpMethod.Get, $"pokemon/{pokemon.ToLower()}");
             using var res = await client.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
 
