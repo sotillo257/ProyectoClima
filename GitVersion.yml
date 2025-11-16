@@ -1,0 +1,47 @@
+mode: ContinuousDeployment
+branches:
+  main:
+    regex: ^main$
+    tag: ''
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    is-mainline: true
+  develop:
+    regex: ^develop$
+    tag: alpha
+    increment: Minor
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: true
+    is-mainline: false
+  release:
+    regex: ^release?[/-]
+    tag: beta
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    is-mainline: false
+  feature:
+    regex: ^feature?[/-]
+    tag: useBranchName
+    increment: Inherit
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    is-mainline: false
+  pull-request:
+    regex: ^(pull|pull\-requests|pr)[/-]
+    tag: PullRequest
+    increment: Inherit
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    is-mainline: false
+  claude:
+    regex: ^claude?[/-]
+    tag: claude
+    increment: Inherit
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    is-mainline: false
+ignore:
+  sha: []
+merge-message-formats: {}
