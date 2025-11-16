@@ -150,12 +150,12 @@ jobs:
 
       - name: Helm lint
         run: |
-          helm lint ./.helm/dockerapp
+          helm lint ./.helm/proyectoclima
 
       - name: Helm package
         run: |
-          helm package ./.helm/dockerapp --version ${{ env.SEMVER }} --destination ./.helm/dockerapp
+          helm package ./.helm/proyectoclima --version ${{ env.SEMVER }} --destination ./.helm/proyectoclima
 
       - name: Helm push
         run: |
-          helm push ./.helm/dockerapp/dockerapp-${{ env.SEMVER }}.tgz oci://${{ env.REGISTRY }}/${{ github.actor }}/charts
+          helm push ./.helm/proyectoclima/proyectoclima-${{ env.SEMVER }}.tgz oci://${{ env.REGISTRY }}/${{ github.actor }}/charts
