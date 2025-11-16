@@ -61,7 +61,7 @@ public class GetPokemonByNameHandlerTests
         var result = await _handler.GetPokemonByNameOrId(pokemonId);
 
         // Assert
-        Assert.Equal(pokemonId, result.Pokemon);
+        Assert.Equal(pokemonName, result.Pokemon);
         Assert.Equal(id, result.Id);
         Assert.Equal(species, result.Species);
         Assert.Equal(type, result.Type);
