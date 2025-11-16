@@ -7,28 +7,26 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 ARG GITVERSION=0.0.1
 ARG MAJOR_MINOR_PATCH=0.0.1
-
-
 WORKDIR /src
-COPY ["ProyectoClima/ProyectoClima.csproj", "ProyectoClima/"]
-COPY ["Aplication/Aplication.csproj", "Aplication/"]
-COPY ["Domain/Domain.csproj", "Domain/"]
-COPY ["Infraestructure/Infraestructure.csproj", "Infraestructure/"]
-RUN dotnet restore "./ProyectoClima/ProyectoClima.csproj"
+COPY ["Directory.Build.props", "."]
+COPY ["src/ProyectoClima/ProyectoClima.csproj", "src/ProyectoClima/"]
+COPY ["src/Aplication/Aplication.csproj", "src/Aplication/"]
+COPY ["src/Domain/Domain.csproj", "src/Domain/"]
+COPY ["src/Infraestructure/Infraestructure.csproj", "src/Infraestructure/"]
+RUN dotnet restore "./src/ProyectoClima/ProyectoClima.csproj"
 COPY . .
-WORKDIR "/src/ProyectoClima"
-RUN dotnet build "./ProyectoClima.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/ProyectoClima"
+RUN dotnet build "./ProyectoClima.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/build /p:Version=$GITVERSION /p:FileVersion=$MAJOR_MINOR_PATCH /p:AssemblyVersion=$MAJOR_MINOR_PATCH
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ProyectoClima.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./ProyectoClima.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false /p:Version=$GITVERSION /p:FileVersion=$MAJOR_MINOR_PATCH /p:AssemblyVersion=$MAJOR_MINOR_PATCH
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final

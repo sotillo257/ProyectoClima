@@ -1,0 +1,161 @@
+name: Pull request - Continuous Integration
+
+env:
+  BUILD_CONFIGURATION: Release
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  GITVERSION_VERSION: 6.3.0
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      BRANCH_NAME: ${{ steps.variables.outputs.branch_name }}
+      SEMVER: ${{ steps.variables.outputs.semver }}
+      FULL_SEMVER: ${{ steps.variables.outputs.full_semver }}
+      MAJOR_MINOR_PATCH: ${{ steps.variables.outputs.major_minor_patch }}
+      MERGE: ${{ steps.variables.outputs.merge }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v4.0.1
+        with:
+          versionSpec: ${{ env.GITVERSION_VERSION }}
+
+      - name: Execute GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v4.0.1
+
+      - name: Set output
+        id: variables
+        run: |
+          echo "branch_name=$(echo ${{ steps.gitversion.outputs.GitVersion_BranchName }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "semver=$(echo ${{ steps.gitversion.outputs.GitVersion_SemVer }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "full_semver=$(echo ${{ steps.gitversion.outputs.GitVersion_FullSemVer }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "major_minor_patch=$(echo ${{ steps.gitversion.outputs.GitVersion_MajorMinorPatch }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "merge=$(echo ${{ (startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/release')) && github.event_name == 'pull_request' && github.event.action == 'closed' }})" >> $GITHUB_OUTPUT
+
+      - name: Create and push tag
+        if: ${{ steps.variables.outputs.merge == 'true' }}
+        run: |
+          git tag ${{ steps.variables.outputs.major_minor_patch }}
+          git push origin ${{ steps.variables.outputs.major_minor_patch }}
+
+  docker:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+      attestations: write
+    needs: [ setup ]
+    env:
+      BRANCH_NAME: ${{ needs.setup.outputs.BRANCH_NAME }}
+      SEMVER: ${{ needs.setup.outputs.SEMVER }}
+      FULL_SEMVER: ${{ needs.setup.outputs.FULL_SEMVER }}
+      MAJOR_MINOR_PATCH: ${{ needs.setup.outputs.MAJOR_MINOR_PATCH }}
+      MERGE: ${{ needs.setup.outputs.MERGE }}
+    steps:
+      - name: Display GitVersion variables
+        shell: bash
+        run: |
+          echo "GitVersion BranchName         : $BRANCH_NAME"
+          echo "GitVersion SemVer             : $SEMVER"
+          echo "GitVersion FullSemVer         : $FULL_SEMVER"
+          echo "GitVersion MajorMinorPatch    : $MAJOR_MINOR_PATCH"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Calculate docker tags
+        id: docker_tags
+        run: |
+
+          IMAGE=${{ env.REGISTRY }}/${{ github.actor }}/proyectoClima/api
+          TAGS="$IMAGE:${{ env.SEMVER }}"
+
+          if [[ "${{ env.MERGE }}" == "true" ]]; then
+            TAGS="$TAGS,$IMAGE:latest"
+          fi
+
+          echo "tags=$TAGS" >> $GITHUB_ENV
+
+      - name: Build and push Docker image
+        id: build_docker
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          file: src/ProyectoClima/Dockerfile
+          build-args: |
+            BUILD_CONFIGURATION=${{ env.BUILD_CONFIGURATION }}
+            GITVERSION=${{ env.SEMVER }}
+            MAJOR_MINOR_PATCH=${{ env.MAJOR_MINOR_PATCH }}
+          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ env.tags }}
+
+  helm:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+      attestations: write
+    needs: [ setup, docker ]
+    env:
+      BRANCH_NAME: ${{ needs.setup.outputs.BRANCH_NAME }}
+      SEMVER: ${{ needs.setup.outputs.SEMVER }}
+      FULL_SEMVER: ${{ needs.setup.outputs.FULL_SEMVER }}
+      MAJOR_MINOR_PATCH: ${{ needs.setup.outputs.MAJOR_MINOR_PATCH }}
+    steps:
+      - name: Display GitVersion variables
+        shell: bash
+        run: |
+          echo "GitVersion BranchName         : $BRANCH_NAME"
+          echo "GitVersion SemVer             : $SEMVER"
+          echo "GitVersion FullSemVer         : $FULL_SEMVER"
+          echo "GitVersion MajorMinorPatch    : $MAJOR_MINOR_PATCH"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Helm login
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io --username ${{ github.actor }} --password-stdin
+
+      - name: Helm lint
+        run: |
+          helm lint ./.helm/dockerapp
+
+      - name: Helm package
+        run: |
+          helm package ./.helm/dockerapp --version ${{ env.SEMVER }} --destination ./.helm/dockerapp
+
+      - name: Helm push
+        run: |
+          helm push ./.helm/dockerapp/dockerapp-${{ env.SEMVER }}.tgz oci://${{ env.REGISTRY }}/${{ github.actor }}/charts

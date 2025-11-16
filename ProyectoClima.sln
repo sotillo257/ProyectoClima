@@ -26,6 +26,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure", "src\Infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoClima", "src\ProyectoClima\ProyectoClima.csproj", "{79304FCB-ADA2-6CBD-2FC6-20606CCAAC35}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{55BA6803-5654-48A9-A4A3-1E5668EE5B9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{0B653E4E-CEAF-40E7-AC19-9E00488ECCA5}"
+	ProjectSection(SolutionItems) = preProject
+		pr-ci.yml = pr-ci.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +79,7 @@ Global
 		{87EDA1D2-4B5B-E524-38CE-D0BFCA5F4D6B} = {099BAC10-8E33-4ADF-A886-8B39BE11A300}
 		{EDBD099D-29F4-AA35-673A-5F69A5187346} = {099BAC10-8E33-4ADF-A886-8B39BE11A300}
 		{79304FCB-ADA2-6CBD-2FC6-20606CCAAC35} = {099BAC10-8E33-4ADF-A886-8B39BE11A300}
+		{0B653E4E-CEAF-40E7-AC19-9E00488ECCA5} = {55BA6803-5654-48A9-A4A3-1E5668EE5B9B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00A0E1E7-7040-44E0-A64D-9FC2DD8CE4AE}
