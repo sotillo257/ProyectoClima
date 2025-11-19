@@ -24,9 +24,25 @@ namespace ClassLibrary1.Recursos
         public List<Stat> stats { get; set; }
         public List<Type> types { get; set; }
         public int weight { get; set; }
+        public int Count { get; set; }
     }
     
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+
+        public class PokemonListResponse
+        {
+            public string? Next { get; set; }
+            public string? Previous { get; set; }
+            public List<PokemonListItem> Results { get; set; } = new();
+        }
+
+        public class PokemonListItem
+        {
+            public string Name { get; set; } = string.Empty;
+            public string Url { get; set; } = string.Empty;
+        }
+    }
+
     public class Ability
     {
         public Ability ability { get; set; }
@@ -411,6 +427,3 @@ namespace ClassLibrary1.Recursos
         public string front_gray { get; set; }
         public string front_transparent { get; set; }
     }
-
-
-}

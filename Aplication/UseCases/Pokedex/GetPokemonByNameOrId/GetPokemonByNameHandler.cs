@@ -10,4 +10,5 @@ public class GetPokemonByNameHandler(IPokedexRepository pokedexRepository) : IGe
 
         return new PokemonByNameResource(pokemon, pokedex.Species, pokedex.Type, pokedex.Id);
     }
+
 }
