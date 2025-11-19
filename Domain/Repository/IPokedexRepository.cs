@@ -4,7 +4,6 @@ namespace Domain.Repository;
 
 public interface IPokedexRepository
 {
-    Task<PokedexList<Pokedex>> GetPokemonsPaginated(Pagination pagination);
+    Task<PokedexList> GetPokemonsAsync(int pageNumber, int pageSize);
     Task<Pokedex> GetPokemonByNameOrId(string pokemon);
-    Task<int> GetTotalPokemonCount();
 }

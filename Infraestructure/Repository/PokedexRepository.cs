@@ -33,11 +33,12 @@ public class PokedexRepository(IHttpClientFactory clientFactory) : IPokedexRepos
         return Pokedex.Create(pokemon, species, type, id);
     }
 
-    public async Task<List<Pokedex>> GetPokemonsAsync(int pageNumber, int pageSize)
+    public async Task<PokedexList> GetPokemonsAsync(int pageNumber, int pageSize)
     {
         var offset = (pageNumber - 1) * pageSize;
 
         var client = clientFactory.CreateClient();
+        client.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
         using var req = new HttpRequestMessage(HttpMethod.Get, $"pokemon?offset={pageNumber}&limit={pageSize}");
         using var res = await client.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
 
@@ -47,25 +48,21 @@ public class PokedexRepository(IHttpClientFactory clientFactory) : IPokedexRepos
             throw new HttpRequestException($"GET failed {(int)res.StatusCode} {res.ReasonPhrase}. Body: {body}");
         }
 
-        var pokemonListResponse = await res.Content.ReadFromJsonAsync<PokedexDTO>();
+        var pokemonListResponse = await res.Content.ReadFromJsonAsync<PokemonPageList>();
         if (pokemonListResponse is null)
         {
             throw new Exception("Failed to deserialize Pokemon list data");
         }
         // Aquí deberías mapear la respuesta a una lista de Pokedex
-        var totalCount = pokemonListResponse.Count;
-        var name = pokemonListResponse.species.name;
-        return new List<Pokedex>(); // Implementación pendiente
-    }
 
-    public Task<PokedexList<Pokedex>> GetPokemonsPaginated(Pagination pagination)
-    {
-        throw new NotImplementedException();
-    }
+        var pokemonNames = pokemonListResponse.results.Select(x => x.name).ToList();
 
-    public Task<int> GetTotalPokemonCount()
-    {
-        throw new NotImplementedException();
+        return PokedexList.Create(
+             pokemonNames,
+             pageNumber,
+             pageSize,
+             pokemonListResponse.count
+             );
     }
 }
 

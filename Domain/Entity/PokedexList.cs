@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entity
 {
-    public class PokedexList<Pokedex>
+    public class PokedexList
     {
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
@@ -16,7 +16,7 @@
             TotalCount = totalCount;
             TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
         }
-        public static PokedexList<Pokedex> Create(List<string> name, int pageNumber, int pageSize, int totalCount)
+        public static PokedexList Create(List<string> name, int pageNumber, int pageSize, int totalCount)
         {
             return new(name, pageNumber, pageSize, totalCount);
         }
