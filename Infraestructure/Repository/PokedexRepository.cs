@@ -64,5 +64,36 @@ public class PokedexRepository(IHttpClientFactory clientFactory) : IPokedexRepos
              pokemonListResponse.count
              );
     }
+    public async Task<LocationList> GetLocationsAsync(int pageNumber, int pageSize)
+    {
+        var offset = (pageNumber - 1) * pageSize;
+
+        var client = clientFactory.CreateClient();
+        client.BaseAddress = new Uri("https://pokeapi.co/api/v2/");
+        using var req = new HttpRequestMessage(HttpMethod.Get, $"location?offset={pageNumber}&limit={pageSize}");
+        using var res = await client.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
+
+        if (!res.IsSuccessStatusCode)
+        {
+            var body = await res.Content.ReadAsStringAsync();
+            throw new HttpRequestException($"GET failed {(int)res.StatusCode} {res.ReasonPhrase}. Body: {body}");
+        }
+
+        var locationListResponse = await res.Content.ReadFromJsonAsync<PokemonPageList>();
+        if (locationListResponse is null)
+        {
+            throw new Exception("Failed to deserialize Location list data");
+        }
+        // Aquí deberías mapear la respuesta a una lista de Pokedex
+
+        var locationNames = locationListResponse.results.Select(x => x.name).ToList();
+
+        return LocationList.Create(
+             locationNames,
+             pageNumber,
+             pageSize,
+             locationListResponse.count
+             );
+    }
 }
 

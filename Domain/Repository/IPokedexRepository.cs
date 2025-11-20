@@ -5,5 +5,6 @@ namespace Domain.Repository;
 public interface IPokedexRepository
 {
     Task<PokedexList> GetPokemonsAsync(int pageNumber, int pageSize);
+    Task<LocationList>GetLocationsAsync(int pageNumber, int pageSize);
     Task<Pokedex> GetPokemonByNameOrId(string pokemon);
 }
