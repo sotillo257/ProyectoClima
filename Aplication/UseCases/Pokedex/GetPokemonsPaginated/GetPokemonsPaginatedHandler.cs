@@ -11,7 +11,7 @@ namespace Aplication.UseCases.Pokedex.GetPokemonsPaginated
             var pokedex = await pokedexRepository.GetPokemonsAsync(pagination.PageNumber, pagination.PageSize);
 
             // Convertir la lista de nombres a un array si el constructor lo requiere
-            return new PokemonsPaginatedResource(pokedex.PageSize, pokedex.PageNumber, pokedex.TotalCount, pokedex.Name);
+            return new PokemonsPaginatedResource(pokedex.PageNumber, pokedex.PageSize, pokedex.TotalCount, pokedex.Name);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Aplication.UseCases.Pokedex.GetLocationsPaginated
             var pokedex = await pokedexRepository.GetLocationsAsync(pagination.PageNumber, pagination.PageSize);
 
         // Convertir la lista de nombres a un array si el constructor lo requiere
-            return new LocationsPaginatedResource(pokedex.PageSize, pokedex.PageNumber, pokedex.TotalCount, pokedex.Location);
+            return new LocationsPaginatedResource(pokedex.PageNumber, pokedex.PageSize, pokedex.TotalCount, pokedex.Location);
         }
     }
 }
