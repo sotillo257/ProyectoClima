@@ -32,7 +32,7 @@ namespace ProyectoClima.Controllers
         public async Task<PokemonsPaginatedResource> Get(int pageNumber = 1, int pageSize = 10)
         {
             var result = await _getPokemonsPaginatedHandler.GetPokemonsPaginated(
-                new Pagination(
+                new GetPokemonPaginatedRequest(
                     pageNumber,
                     pageSize));
 
@@ -46,13 +46,12 @@ namespace ProyectoClima.Controllers
         }
 
         [HttpGet("location")]
-        public async Task<LocationsPaginatedResource> GetLocations(int pageNumber = 1, int pageSize = 10, string sortBy = "name", string sortOrder = "asc")
+        public async Task<LocationsPaginatedResource> GetLocations(int pageNumber = 1, int pageSize = 10, string sortOrder = "asc")
         {
             var result = await _getLocationsPaginatedHandler.GetLocationsPaginated(
-                new Pagination(
+                new GetLocationPaginatdRequest(
                     pageNumber,
                     pageSize,
-                    sortBy,
                     sortOrder));
 
             return result;

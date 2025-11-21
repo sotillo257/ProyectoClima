@@ -4,6 +4,6 @@ namespace Aplication.UseCases.Pokedex.GetLocationsPaginated
 {
     public interface IGetLocationsPaginatedHandler
     {
-        Task<LocationsPaginatedResource> GetLocationsPaginated(Pagination pagination);
+        Task<LocationsPaginatedResource> GetLocationsPaginated(GetLocationPaginatdRequest pagination);
     }
 }

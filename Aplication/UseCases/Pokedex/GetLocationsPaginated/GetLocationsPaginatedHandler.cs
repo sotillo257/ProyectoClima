@@ -5,12 +5,20 @@ namespace Aplication.UseCases.Pokedex.GetLocationsPaginated
 {
     public class GetLocationsPaginatedHandler(IPokedexRepository pokedexRepository) : IGetLocationsPaginatedHandler
     {
-        public async Task<LocationsPaginatedResource> GetLocationsPaginated(Pagination pagination)
+        public async Task<LocationsPaginatedResource> GetLocationsPaginated(GetLocationPaginatdRequest pagination)
         {
-            var pokedex = await pokedexRepository.GetLocationsAsync(pagination.PageNumber, pagination.PageSize, pagination.SortBy);
+            var pokedex = await pokedexRepository.GetLocationsAsync(pagination.PageNumber, pagination.PageSize);
 
-        // Convertir la lista de nombres a un array si el constructor lo requiere
-            return new LocationsPaginatedResource(pokedex.PageNumber, pokedex.PageSize, pokedex.TotalCount, pokedex.Location, pagination.SortBy, pagination.SortOrder);
+            if (pagination.SortOrder == "asc")
+            {
+                pokedex.Location = pokedex.Location.OrderBy(x => x).ToList();
+            }
+            else if (pagination.SortOrder == "desc")
+            {
+                pokedex.Location = pokedex.Location.OrderByDescending(x => x).ToList();
+            }
+
+            return new LocationsPaginatedResource(pokedex.PageNumber, pokedex.PageSize, pokedex.TotalCount, pokedex.Location, pagination.SortOrder);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Aplication.UseCases.Pokedex.GetPokemonsPaginated
 {
     public class GetPokemonsPaginatedHandler(IPokedexRepository pokedexRepository) : IGetPokemonsPaginatedHandler
     {
-        public async Task<PokemonsPaginatedResource> GetPokemonsPaginated(Pagination pagination)
+        public async Task<PokemonsPaginatedResource> GetPokemonsPaginated(GetPokemonPaginatedRequest pagination)
         {
             var pokedex = await pokedexRepository.GetPokemonsAsync(pagination.PageNumber, pagination.PageSize);
 

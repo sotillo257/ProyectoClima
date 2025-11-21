@@ -4,5 +4,5 @@ namespace Aplication.UseCases.Pokedex.GetPokemonsPaginated;
 
 public interface IGetPokemonsPaginatedHandler
 {
-    Task<PokemonsPaginatedResource> GetPokemonsPaginated(Pagination pagination);
+    Task<PokemonsPaginatedResource> GetPokemonsPaginated(GetPokemonPaginatedRequest pagination);
 }
