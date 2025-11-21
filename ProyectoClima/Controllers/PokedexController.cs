@@ -46,12 +46,14 @@ namespace ProyectoClima.Controllers
         }
 
         [HttpGet("location")]
-        public async Task<LocationsPaginatedResource> GetLocations(int pageNumber = 1, int pageSize = 10)
+        public async Task<LocationsPaginatedResource> GetLocations(int pageNumber = 1, int pageSize = 10, string sortBy = "name", string sortOrder = "asc")
         {
             var result = await _getLocationsPaginatedHandler.GetLocationsPaginated(
                 new Pagination(
                     pageNumber,
-                    pageSize));
+                    pageSize,
+                    sortBy,
+                    sortOrder));
 
             return result;
         }

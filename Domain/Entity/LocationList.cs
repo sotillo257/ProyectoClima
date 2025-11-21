@@ -7,6 +7,8 @@
         public int TotalPages { get; set; }
         public int TotalCount { get; set; }
         public List<string> Location{ get; set; } = new();
+        public string SortBy { get; set; } = "location";
+        public string SortOrder { get; set; } = "asc";
 
         public LocationList(List<string> location, int pageNumber, int pageSize, int totalCount)
         {

@@ -7,7 +7,13 @@
         public object previous { get; set; }
         public List<Result> results { get; set; }
     }
-    public class Result
+    public class SortingMetadataDto
+    {
+        public string SortBy { get; set; } = "name";
+        public string SortOrder { get; set; } = "asc";
+    }
+
+        public class Result
     {
         public string name { get; set; }
         public string url { get; set; }
